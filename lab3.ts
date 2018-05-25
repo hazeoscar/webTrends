@@ -30,7 +30,7 @@ $.ajax({
     url:'./locations.json',
     dataType: 'json',
     success: function(data){
-        // console.log(data);
+        console.log(data);
         for(let i of data){
             // console.log(i.address);
         }
@@ -83,7 +83,7 @@ function addMarker() : void{
     function(results, status){
         if (status == 'OK'){
             resultLatLng.lat = results[0].geometry.location.lat();
-            resultLatLng.lng = results[0].geometry.location.long();
+            resultLatLng.lng = results[0].geometry.location.lng();
         }
         return resultLatLng;
     }

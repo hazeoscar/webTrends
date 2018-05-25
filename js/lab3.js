@@ -1,31 +1,30 @@
-var map;
-var addresses;
+"use strict";
+let map;
+let addresses;
 // need to initialize it to an empty array to be then recognized. 
-var mapMarkers = [];
+let mapMarkers = [];
 // class for map markers
-var MapMaker = /** @class */ (function () {
+class MapMaker {
     //    making constructors
-    function MapMaker(address) {
+    constructor(address) {
         this.Address = address;
     }
     ;
-    return MapMaker;
-}());
-var Toronto = { lat: 43, lng: -79.38 };
+}
+let Toronto = { lat: 43, lng: -79.38 };
 $.ajax({
     url: './locations.json',
     dataType: 'json',
     success: function (data) {
         console.log(data);
-        for (var _i = 0, data_1 = data; _i < data_1.length; _i++) {
-            var i = data_1[_i];
+        for (let i of data) {
+            // console.log(i.address);
         }
         addresses = data;
-        for (var _a = 0, addresses_1 = addresses; _a < addresses_1.length; _a++) {
-            var i = addresses_1[_a];
+        for (let i of addresses) {
             // console.log(i.addresses);
             // add map markers to array of map markers
-            var newMapMarker = new MapMaker(i.address);
+            let newMapMarker = new MapMaker(i.address);
             mapMarkers.push(newMapMarker);
         }
         // console.log(mapMarkers);
@@ -41,7 +40,7 @@ function initMap() {
     });
 }
 // add markers
-var mapMakersIndex = 0;
+let mapMakersIndex = 0;
 setTimeout(addMarker, 1000);
 function addMarker() {
     mapMarkers[mapMakersIndex].Latlng = getLatLng(mapMarkers[mapMakersIndex].Address + " Toronto, Canada");
@@ -49,7 +48,7 @@ function addMarker() {
 //   beging of latlng functon
 function getLatLng(address) {
     //  returns lat and long of an address using google maps
-    var resultLatLng = { lat: 0, lng: 0 };
+    let resultLatLng = { lat: 0, lng: 0 };
     // geocoder is a metho and the parantheses takes 2 arguments. 
     // in js object start and end in curly braces
     geocoder.geocode({
